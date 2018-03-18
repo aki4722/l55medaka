@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+      $roles = Role::select('id', 'name', 'label')->get();
+      $roles = $roles->pluck('label', 'name');
+      \Debugbar::info($roles);
         return view('home');
     }
 }

@@ -50,6 +50,17 @@
                             <li><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                             <li><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
                         @else
+                            @can('system')
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        system menu<span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link" href="{{ url('/admin') }}">system</a>
+                                    </div>
+                                </li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -63,7 +74,7 @@
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        @csrf
+                                         {{ csrf_field() }}
                                     </form>
                                 </div>
                             </li>
