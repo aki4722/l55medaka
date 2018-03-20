@@ -12,13 +12,18 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/login', 'Auth/LoginController@index')->name('login');
-//Route::get('/logout', 'Auth/LogoutController@index')->name('login');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');//Route::get('/logout', 'Auth/LogoutController@index')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //LoginCheck
 Route::group(['middleware' => 'auth'], function () {
    //rolesCheck
    Route::group(['middleware' => 'roles', 'roles' => 'system'], function (){
-     // 以下 に admin 権 限 者 のみ 表示 するルート 定 義 を 記 述 します。
+     // 以下 に system 権 限 者 のみ 表示 するルート 定 義 を 記 述 します。
      Route::get('admin', 'Admin\AdminController@index');
      Route::resource('admin/roles', 'Admin\RolesController');
      Route::resource('admin/permissions', 'Admin\PermissionsController');
@@ -28,9 +33,14 @@ Route::group(['middleware' => 'auth'], function () {
    });
    Route::group(['middleware' => 'roles', 'roles' => 'admin'], function (){
      // 以下 に admin 権 限 者 のみ 表示 するルート 定 義 を 記 述 します。
-     Route::get('/register', 'Auth/registerController@index')->name('register');
+     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+     Route::post('register', 'Auth\RegisterController@register');
    });
 });
-Auth::routes();
+//Auth::routes();
+
+// Registration Routes...
+
+// Password Reset Routes...
 
 Route::get('/home', 'HomeController@index')->name('home');
