@@ -19,6 +19,8 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::resource('employee', 'Business\employeeAppController');
+
 //LoginCheck
 Route::group(['middleware' => 'auth'], function () {
    //rolesCheck
@@ -30,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
      Route::resource('admin/users', 'Admin\UsersController');
      Route::get('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@getGenerator']);
      Route::post('admin/generator', ['uses' => '\Appzcoder\LaravelAdmin\Controllers\ProcessController@postGenerator']);
+     Route::resource('admin/employee', 'Employee\employeeController');
    });
    Route::group(['middleware' => 'roles', 'roles' => 'admin'], function (){
      // 以下 に admin 権 限 者 のみ 表示 するルート 定 義 を 記 述 します。
