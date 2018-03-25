@@ -5,41 +5,26 @@
         <div class="row">
           @include('business.sidebar')
             <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Employee</div>
+                <div class="card border-danger">
+                    <div class="card-header">社員</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/employee/create') }}" class="btn btn-success btn-sm" title="Add New employee">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/employee', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                            <span class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
 
-                        <br/>
-                        <br/>
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>User Id</th><th>Fname</th><th>Lneme</th><th>Actions</th>
+                                        <th></th><th>名前</th><th>年齢</th><th>電話番号</th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($employee as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->user_id }}</td><td>{{ $item->fname }}</td><td>{{ $item->lneme }}</td>
+                                        <td>{{ $item->fname}}{{ $item->lname }}</td><td>{{ $item->birthday}}</td><td>{{ $item->tel1 }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/employee/' . $item->id) }}" title="View employee"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/employee/' . $item->id . '/edit') }}" title="Edit employee"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/admin/employee/' . $item->id) }}" title="View employee"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>詳細</button></a>
+                                            <a href="{{ url('/admin/employee/' . $item->id . '/edit') }}" title="Edit employee"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>編集</button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
                                                 'url' => ['/admin/employee', $item->id],

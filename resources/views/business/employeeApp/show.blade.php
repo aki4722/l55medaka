@@ -6,7 +6,7 @@
             @include('business.sidebar')
 
             <div class="col-md-9">
-                <div class="card">
+                <div class="card border-danger">
                     <div class="card-header">employee {{ $employee->id }}</div>
                     <div class="card-body">
 

@@ -1,7 +1,7 @@
 <div class="col-md-2">
-      <div class="card">
-          <div class="card-header">
-          　　名簿
+      <div class="card border-danger">
+          <div class="card-header text-white bg-danger">
+          　　 名　簿
           </div>
 
           <div class="card-body">
